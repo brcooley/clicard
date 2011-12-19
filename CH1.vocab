@@ -1,240 +1,281 @@
 [
   {
-    "meaning": ["Move backwards","Reverse"], 
-    "alt": ["D\u00e0o"], 
-    "word": "\u5012", 
-    "pos": ["V"]
-  }, 
-  {
-    "meaning": ["Don't","Other"], 
-    "alt": ["Bi\u00e9"], 
-    "word": "\u522b", 
-    "pos": ["Aux"]
-  }, 
-  {
-    "meaning": ["Landlord"], 
-    "alt": ["F\u00e1ngd\u014dng"], 
-    "word": "\u623f\u4e1c", 
-    "pos": ["N"]
-  }, 
-  {
-    "meaning": ["Tree"], 
-    "alt": ["Sh\u00f9"], 
-    "word": "\u6811", 
-    "pos": ["N"]
-  }, 
-  {
-    "meaning": ["Collide","Hit","Strike"], 
-    "alt": ["Zhu\u00e0ng"], 
-    "word": "\u649e", 
-    "pos": ["V"]
-  }, 
-  {
-    "meaning": [], 
     "alt": [
-      "Hu\u00e0i"
+      "Dào", 
+      "Dao4"
     ], 
-    "word": "\u574f", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "倒"
   }, 
   {
-    "meaning": [], 
     "alt": [
+      "Bié", 
+      "Bie2"
+    ], 
+    "meaning": [], 
+    "pos": [], 
+    "word": "别"
+  }, 
+  {
+    "alt": [
+      "Fángdōng", 
+      "Fang2dong1"
+    ], 
+    "meaning": [], 
+    "pos": [], 
+    "word": "房东"
+  }, 
+  {
+    "alt": [
+      "Shù", 
+      "Shu4"
+    ], 
+    "meaning": [], 
+    "pos": [], 
+    "word": "树"
+  }, 
+  {
+    "alt": [
+      "Zhuàng", 
+      "Zhuang4"
+    ], 
+    "meaning": [], 
+    "pos": [], 
+    "word": "撞"
+  }, 
+  {
+    "alt": [
+      "Huài", 
+      "Huai4"
+    ], 
+    "meaning": [], 
+    "pos": [], 
+    "word": "坏"
+  }, 
+  {
+    "alt": [
+      "Ya", 
       "Ya"
     ], 
-    "word": "\u5440", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "呀"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "Xi\u01ceox\u012bn"
+      "Xiǎoxīn", 
+      "Xiao3xin1"
     ], 
-    "word": "\u5c0f\u5fc3", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "小心"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "J\u00ecngzi"
+      "Jìngzi", 
+      "Jing4zi"
     ], 
-    "word": "\u955c\u5b50", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "镜子"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "P\u00f2"
+      "Pò", 
+      "Po4"
     ], 
-    "word": "\u7834", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "破"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "F\u0113ng\u014dngh\u00e9zu\u00f2"
+      "Fēngōnghézuò", 
+      "Fen1gong1he2zuo4"
     ], 
-    "word": "\u5206\u5de5\u5408\u4f5c", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "分工合作"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "Zh\u01d4y\u00ec"
+      "Zhǔyì", 
+      "Zhu3yi4"
     ], 
-    "word": "\u4e3b\u610f", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "主意"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "F\u00f9z\u00e9"
+      "Fùzé", 
+      "Fu4ze2"
     ], 
-    "word": "\u8d1f\u8d23", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "负责"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "X\u00edngl\u01d0"
+      "Xínglǐ", 
+      "Xing2li3"
     ], 
-    "word": "\u884c\u674e", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "行李"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "F\u00e0ng"
+      "Fàng", 
+      "Fang4"
     ], 
-    "word": "\u653e", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "放"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "Zhu\u0101ng"
+      "Zhuāng", 
+      "Zhuang1"
     ], 
-    "word": "\u88c5", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "装"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "S\u01ceo"
+      "Sǎo", 
+      "Sao3"
     ], 
-    "word": "\u626b", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "扫"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "Zh\u011bngl\u01d0"
+      "Zhěnglǐ", 
+      "Zheng3li3"
     ], 
-    "word": "\u6574\u7406", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "整理"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "Xi\u0101ngzi"
+      "Xiāngzi", 
+      "Xiang1zi"
     ], 
-    "word": "\u7bb1\u5b50", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "箱子"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "Y\u012bf\u00fa"
+      "Yīfú", 
+      "Yi1fu2"
     ], 
-    "word": "\u8863\u670d", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "衣服"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "Gu\u00e0"
+      "Guà", 
+      "Gua4"
     ], 
-    "word": "\u6302", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "挂"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "L\u00e8i"
+      "Lèi", 
+      "Lei4"
     ], 
-    "word": "\u7d2f", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "累"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "Q\u01d0ngk\u00e8"
+      "Qǐngkè", 
+      "Qing3ke4"
     ], 
-    "word": "\u8bf7\u5ba2", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "请客"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "S\u01d0"
+      "Sǐ", 
+      "Si3"
     ], 
-    "word": "\u6b7b", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "死"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "F\u00f9j\u00ecn"
+      "Fùjìn", 
+      "Fu4jin4"
     ], 
-    "word": "\u9644\u8fd1", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "附近"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "W\u00e0ng"
+      "Wàng", 
+      "Wang4"
     ], 
-    "word": "\u5fd8", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "忘"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "M\u00e9n"
+      "Mén", 
+      "Men2"
     ], 
-    "word": "\u95e8", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "门"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "Chu\u0101ng"
+      "Chuāng", 
+      "Chuang1"
     ], 
-    "word": "\u7a97", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "窗"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "Gu\u0101nsh\u00e0ng"
+      "Guānshàng", 
+      "Guan1shang4"
     ], 
-    "word": "\u5173\u4e0a", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "关上"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "W\u00e0it\u00e0o"
+      "Wàitào", 
+      "Wai4tao4"
     ], 
-    "word": "\u5916\u5957", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "外套"
   }, 
   {
-    "meaning": [], 
     "alt": [
-      "Z\u00e1nmen"
+      "Zánmen", 
+      "Zan2men"
     ], 
-    "word": "\u54b1\u4eec", 
-    "pos": []
+    "meaning": [], 
+    "pos": [], 
+    "word": "咱们"
   }
 ]
