@@ -4,8 +4,12 @@
       "Dào", 
       "Dao4"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Move backwards"
+    ], 
+    "pos": [
+      "V"
+    ], 
     "word": "倒"
   }, 
   {
@@ -13,8 +17,14 @@
       "Bié", 
       "Bie2"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Don't", 
+      "Other"
+    ], 
+    "pos": [
+      "Aux", 
+      "Adj"
+    ], 
     "word": "别"
   }, 
   {
@@ -22,8 +32,12 @@
       "Fángdōng", 
       "Fang2dong1"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Landlord"
+    ], 
+    "pos": [
+      "N"
+    ], 
     "word": "房东"
   }, 
   {
@@ -31,8 +45,12 @@
       "Shù", 
       "Shu4"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Tree"
+    ], 
+    "pos": [
+      "N"
+    ], 
     "word": "树"
   }, 
   {
@@ -40,8 +58,16 @@
       "Zhuàng", 
       "Zhuang4"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Collide", 
+      "Hit", 
+      "Strike"
+    ], 
+    "pos": [
+      "V", 
+      "V", 
+      "V"
+    ], 
     "word": "撞"
   }, 
   {
@@ -49,8 +75,12 @@
       "Huài", 
       "Huai4"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Bad"
+    ], 
+    "pos": [
+      "Adj"
+    ], 
     "word": "坏"
   }, 
   {
@@ -58,8 +88,12 @@
       "Ya", 
       "Ya"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "TS"
+    ], 
+    "pos": [
+      "Part"
+    ], 
     "word": "呀"
   }, 
   {
@@ -67,8 +101,14 @@
       "Xiǎoxīn", 
       "Xiao3xin1"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Careful", 
+      "Cautious"
+    ], 
+    "pos": [
+      "V", 
+      "Adj"
+    ], 
     "word": "小心"
   }, 
   {
@@ -76,8 +116,12 @@
       "Jìngzi", 
       "Jing4zi"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Mirror"
+    ], 
+    "pos": [
+      "N"
+    ], 
     "word": "镜子"
   }, 
   {
@@ -85,8 +129,12 @@
       "Pò", 
       "Po4"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Broken"
+    ], 
+    "pos": [
+      "Adj"
+    ], 
     "word": "破"
   }, 
   {
@@ -94,8 +142,14 @@
       "Fēngōnghézuò", 
       "Fen1gong1he2zuo4"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Division of labor", 
+      "To collaborate by dividing up the work"
+    ], 
+    "pos": [
+      "Ph", 
+      "Ph"
+    ], 
     "word": "分工合作"
   }, 
   {
@@ -103,8 +157,12 @@
       "Zhǔyì", 
       "Zhu3yi4"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Idea"
+    ], 
+    "pos": [
+      "N"
+    ], 
     "word": "主意"
   }, 
   {
@@ -112,8 +170,14 @@
       "Fùzé", 
       "Fu4ze2"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Be responsible for", 
+      "Responsible"
+    ], 
+    "pos": [
+      "V", 
+      "V"
+    ], 
     "word": "负责"
   }, 
   {
@@ -121,8 +185,14 @@
       "Xínglǐ", 
       "Xing2li3"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Luggage", 
+      "Baggage"
+    ], 
+    "pos": [
+      "N", 
+      "N"
+    ], 
     "word": "行李"
   }, 
   {
@@ -130,8 +200,14 @@
       "Fàng", 
       "Fang4"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Put", 
+      "Place"
+    ], 
+    "pos": [
+      "V", 
+      "V"
+    ], 
     "word": "放"
   }, 
   {
@@ -139,8 +215,18 @@
       "Zhuāng", 
       "Zhuang1"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Install", 
+      "Assemble", 
+      "Load", 
+      "Pack"
+    ], 
+    "pos": [
+      "V", 
+      "V", 
+      "V", 
+      "V"
+    ], 
     "word": "装"
   }, 
   {
@@ -148,8 +234,14 @@
       "Sǎo", 
       "Sao3"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Clean", 
+      "Sweep"
+    ], 
+    "pos": [
+      "V", 
+      "V"
+    ], 
     "word": "扫"
   }, 
   {
@@ -157,8 +249,14 @@
       "Zhěnglǐ", 
       "Zheng3li3"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Arrange", 
+      "Sort out"
+    ], 
+    "pos": [
+      "V", 
+      "V"
+    ], 
     "word": "整理"
   }, 
   {
@@ -166,8 +264,14 @@
       "Xiāngzi", 
       "Xiang1zi"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Box", 
+      "Case"
+    ], 
+    "pos": [
+      "N", 
+      "N"
+    ], 
     "word": "箱子"
   }, 
   {
@@ -175,8 +279,12 @@
       "Yīfú", 
       "Yi1fu2"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Clothes"
+    ], 
+    "pos": [
+      "N"
+    ], 
     "word": "衣服"
   }, 
   {
@@ -184,8 +292,12 @@
       "Guà", 
       "Gua4"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Hang"
+    ], 
+    "pos": [
+      "V"
+    ], 
     "word": "挂"
   }, 
   {
@@ -193,8 +305,12 @@
       "Lèi", 
       "Lei4"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Tired"
+    ], 
+    "pos": [
+      "Adj"
+    ], 
     "word": "累"
   }, 
   {
@@ -202,8 +318,16 @@
       "Qǐngkè", 
       "Qing3ke4"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Host", 
+      "Act as the host", 
+      "Treat"
+    ], 
+    "pos": [
+      "V", 
+      "V", 
+      "V"
+    ], 
     "word": "请客"
   }, 
   {
@@ -211,8 +335,14 @@
       "Sǐ", 
       "Si3"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Dead", 
+      "Die"
+    ], 
+    "pos": [
+      "Adj", 
+      "V"
+    ], 
     "word": "死"
   }, 
   {
@@ -220,8 +350,12 @@
       "Fùjìn", 
       "Fu4jin4"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Nearby"
+    ], 
+    "pos": [
+      "N"
+    ], 
     "word": "附近"
   }, 
   {
@@ -229,8 +363,12 @@
       "Wàng", 
       "Wang4"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Forget"
+    ], 
+    "pos": [
+      "V"
+    ], 
     "word": "忘"
   }, 
   {
@@ -238,8 +376,12 @@
       "Mén", 
       "Men2"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Door"
+    ], 
+    "pos": [
+      "N"
+    ], 
     "word": "门"
   }, 
   {
@@ -247,8 +389,12 @@
       "Chuāng", 
       "Chuang1"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Window"
+    ], 
+    "pos": [
+      "N"
+    ], 
     "word": "窗"
   }, 
   {
@@ -256,8 +402,12 @@
       "Guānshàng", 
       "Guan1shang4"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Close"
+    ], 
+    "pos": [
+      "VC"
+    ], 
     "word": "关上"
   }, 
   {
@@ -265,8 +415,12 @@
       "Wàitào", 
       "Wai4tao4"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "Coat"
+    ], 
+    "pos": [
+      "N"
+    ], 
     "word": "外套"
   }, 
   {
@@ -274,8 +428,14 @@
       "Zánmen", 
       "Zan2men"
     ], 
-    "meaning": [], 
-    "pos": [], 
+    "meaning": [
+      "We", 
+      "Us"
+    ], 
+    "pos": [
+      "N", 
+      "N"
+    ], 
     "word": "咱们"
   }
 ]
