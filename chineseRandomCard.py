@@ -88,18 +88,44 @@ def main():
 		random.shuffle(wrongAns)
 
 
+# Put here for reference, need to integrate into below
+def ignoreComments(inputStr):
+	try:
+		print(inputStr[:inputStr.index('#')].strip())
+	except ValueError:
+		print(inputStr.strip())
+
+
+
+# Need to add comment parsing, more standard and robust alt handling, optional POS data, maybe more?
 def createVocab(filename):
 	'''Convert vraw vocab input into a JSON list.'''
 	with open(filename,'r') as fIn:
 		wordData = fIn.read().split('----')
+
+		for dataSec in wordData:
+			dataTag = dataSec.split(':')[0]
+			if dataTag == 'ALT':
+				pass
+			elif dataTag == 'MEAN':
+				pass
+			elif dataTag == 'POS':
+				pass
+			elif dataTag == 'EXT':
+				pass
+			else:
+				#Spew errors!  Have an issue as the (first) word section is getting in here, maybe parse that outside loop?
+				pass
+
 		words = wordData[0].split()
 		alts = wordData[1].split('  ')
 		meanings = wordData[2].split('  ')
-		pos = wordData[3].split('  ')
-
-		if len(words) != len(alts) != len(meanings):
+		if len(wordData) > 3:
+			pos = wordData[3].split('  ')
+		if len(words) != len(alts) != len(meanings) != len(pos):	#This fails to correctly catch errors
 			print('Error converting, unequal number of word/alt/meaning pairings.')
 			sys.exit(1)
+		#The following is nowhere near robust
 		wordJSON = [{'word':w, 'alt':[''.join(x.split()).strip(), pinyinToASCII(x.strip())], 'pos':y.strip().split(', '),
 					'meaning':z.strip().split(', ')} for w,x,y,z in zip(words, alts, pos, meanings)]
 

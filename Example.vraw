@@ -1,0 +1,16 @@
+# Formatting guide for a .VRAW file
+# Comments are allowed, using the pound ('#') sign
+# Order of the sections after the words does not matter
+
+words
+one
+per
+line
+----
+ALT: (Optional) Alternate representations of these words (e.g. pinyin)  Separated by two spaces  For more than one alternate representation for a word, use a comma delimited list, like this one  Or, this, one
+----
+MEAN: Meanings for each word  Also delimited by two spaces  And using the same comma convention  As above, for multiple definitions of the same word
+----
+POS: (Optional) Parts of speech  There must be one part of speech  For each meaning provided  Even if the meanings share the same part of speech, like this one
+----
+EXT: (Optional) Extra metadata, for future use, currently ignored

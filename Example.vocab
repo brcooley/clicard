@@ -1,0 +1,56 @@
+[
+  {
+    "alt": [
+      "Alternaterepresentationsofthesewords(e.g.pinyin)", 
+      "Alternaterepresentationsofthesewords(e.g.pinyin)"
+    ], 
+    "meaning": [
+      "Meanings for each word"
+    ], 
+    "pos": [
+      "(Optional) Parts of speech"
+    ], 
+    "word": "#"
+  }, 
+  {
+    "alt": [
+      "Separatedbytwospaces", 
+      "Separatedbytwospaces"
+    ], 
+    "meaning": [
+      "Also delimited by two spaces"
+    ], 
+    "pos": [
+      "There must be one part of speech"
+    ], 
+    "word": "JSON"
+  }, 
+  {
+    "alt": [
+      "Formorethanonealternaterepresentationforaword,useacommadelimitedlist,likethisone", 
+      "Formorethanonealternaterepresentationforaword,useacommadelimitedlist,likethisone"
+    ], 
+    "meaning": [
+      "And using the same comma convention"
+    ], 
+    "pos": [
+      "For each meaning provided"
+    ], 
+    "word": "formatting"
+  }, 
+  {
+    "alt": [
+      "Or,this,one", 
+      "Or,this,one"
+    ], 
+    "meaning": [
+      "As above", 
+      "for multiple definitions of the same word"
+    ], 
+    "pos": [
+      "Even if the meanings share the same part of speech", 
+      "like this one"
+    ], 
+    "word": "guide"
+  }
+]
