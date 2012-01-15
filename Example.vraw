@@ -1,16 +1,34 @@
 # Formatting guide for a .VRAW file
 # Comments are allowed, using the pound ('#') sign
-# Order of the sections after the words does not matter
-
+# Each section must start with one of the six identifiers ('LNG:', WRD:', ALT:', 'DEF:', 'POS:', or 'EXT:')
+# Order of the sections does not matter, but each must be delimited by '----' (four dashes)
+LNG:
+Chinese	# Or anything really, currently only Chinese modifies the parsing, allowing for pinyin
+		# to be converted to word(tone number) form (e.g. shi4)
+----
+WRD:
 words
 one
 per
-line
+line	# Comments allowed in sections, too
 ----
-ALT: (Optional) Alternate representations of these words (e.g. pinyin)  Separated by two spaces  For more than one alternate representation for a word, use a comma delimited list, like this one  Or, this, one
+ALT:	# (Optional)
+Alternate representations of these words (e.g. pinyin)
+Separated by SEP or a linebreak ('\n') if none is given
+For more than one alternate representation for a word, use a comma delimited list, like this one
+Or, this, one
 ----
-MEAN: Meanings for each word  Also delimited by two spaces  And using the same comma convention  As above, for multiple definitions of the same word
+DEF:
+Meanings for each word
+Also delimited by SEP
+And using the same comma convention
+As above, for multiple definitions of the same word
 ----
-POS: (Optional) Parts of speech  There must be one part of speech  For each meaning provided  Even if the meanings share the same part of speech, like this one
+POS:	# (Optional)
+Parts of speech
+There must be one part of speech
+For each meaning provided
+Even if the meanings share the same part of speech, like this one
 ----
-EXT: (Optional) Extra metadata, for future use, currently ignored
+EXT:	# (Optional)
+Extra metadata, for future use, currently ignored

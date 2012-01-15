@@ -1,10 +1,22 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
+# Target - Python 3.1.X and later
 
-'''
+''' CLIFlashcards is a command-line vocabulary study tool
+	Copyright (C) 2012  Brett Cooley
 
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
 
-'''
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>. '''
 
 import sys
 import os.path
@@ -14,7 +26,7 @@ import re
 from optparse import *
 
 PROG_TITLE = 'CLIFlashcards'
-VERSION = '0.3'
+VERSION = '0.5'
 
 PINYIN_TRANSLATIONS = {
 	'ü': 'v',
@@ -30,9 +42,11 @@ def main():
 	parser = OptionParser(description=DESC, prog=PROG_TITLE, version='{} version {}'.format(PROG_TITLE, VERSION))
 	parser.add_option('-b','--build', help='Convert raw vocab input into JSON list', metavar='FILE')
 	parser.add_option('-t','--to-raw', help='Convert ctxt input into raw', metavar='FILE')
+	parser.add_option('-r','--human-readable', action='store_const', const=2, help='Prints vocab file with indentation')
 	parser.add_option('-i','--interact', action='store_true', help='Enter interactive mode for debugging')
 	#parser.add_argument('-d','-D','--debug', action='store_true', help='enables debugging and logging')
 	args, cardfiles = parser.parse_args()
+	print()
 
 	wordList = []
 	ansList  = []
@@ -54,9 +68,18 @@ def main():
 				print(asciiToPinyin(toTrans, False))
 
 	if args.build:
-		createVocab(args.build)
+		try:
+			createVocab(args.build, args.human_readable)
+		except (IOError, ValueError) as e:
+			print(e)
+		else:
+			print('{}.vocab sucessfully built\n'.format(args.build[:-5]))
+		finally:
+			sys.exit()
+
 	if args.to_raw:
 		toRaw(args.to_raw)
+		sys.exit(0)
 
 	# Builds list of word data from each file passed in
 	wordList = []
@@ -88,62 +111,81 @@ def main():
 		random.shuffle(wrongAns)
 
 
-# Put here for reference, need to integrate into below
-def ignoreComments(inputStr):
-	try:
-		print(inputStr[:inputStr.index('#')].strip())
-	except ValueError:
-		print(inputStr.strip())
+def stripComments(inputList):
+	'''Takes a list and removes comments from each line, returning a new list.'''
+	toReturn = []
+	for line in inputList:
+		try:
+			if line.index('#') != 0:
+				toReturn.append(line[:line.index('#')].strip())
+		except ValueError:
+			toReturn.append(line.strip())
+	return toReturn
 
 
-
-# Need to add comment parsing, more standard and robust alt handling, optional POS data, maybe more?
-def createVocab(filename):
+def createVocab(filename, indentLevel):
 	'''Convert vraw vocab input into a JSON list.'''
+	if filename[-5:] != '.vraw':
+		raise IOError('File must be of type VRAW')
 	with open(filename,'r') as fIn:
-		wordData = fIn.read().split('----')
+		rawData = [x for x in stripComments(fIn.readlines())]
+		wordData = '\n'.join(rawData).split('----')
 
-		for dataSec in wordData:
-			dataTag = dataSec.split(':')[0]
-			if dataTag == 'ALT':
-				pass
-			elif dataTag == 'MEAN':
-				pass
-			elif dataTag == 'POS':
-				pass
-			elif dataTag == 'EXT':
-				pass
-			else:
-				#Spew errors!  Have an issue as the (first) word section is getting in here, maybe parse that outside loop?
-				pass
+	counts = []
+	words = alts = meanings = pos = []
+	convertPinyin = False
+	sep = '\n'
 
-		words = wordData[0].split()
-		alts = wordData[1].split('  ')
-		meanings = wordData[2].split('  ')
-		if len(wordData) > 3:
-			pos = wordData[3].split('  ')
-		if len(words) != len(alts) != len(meanings) != len(pos):	#This fails to correctly catch errors
-			print('Error converting, unequal number of word/alt/meaning pairings.')
-			sys.exit(1)
-		#The following is nowhere near robust
-		wordJSON = [{'word':w, 'alt':[''.join(x.split()).strip(), pinyinToASCII(x.strip())], 'pos':y.strip().split(', '),
-					'meaning':z.strip().split(', ')} for w,x,y,z in zip(words, alts, pos, meanings)]
+	for dataSec in wordData:
+		tag, rest = dataSec.split(':',1)
+		tag = tag.strip()
+		if tag == 'LNG':
+			convertPinyin = True
+		elif tag == 'WRD':
+			words = [x for x in rest.split(sep) if x != '']
+			counts.append(len(words))
+		elif tag == 'ALT':
+			alts = [x for x in rest.split(sep) if x != '']
+			counts.append(len(alts))
+		elif tag == 'DEF':
+			meanings = [x for x in rest.split(sep) if x != '']
+			counts.append(len(meanings))
+		elif tag == 'POS':
+			pos = [x for x in rest.split(sep) if x != '']
+			counts.append(len(pos))
+		elif tag == 'EXT':
+			#Currently, we ignore this section, can be put to use later
+			continue
+		else:
+			raise ValueError('A section of type {} is undefined'.format(tag))
+
+	if [x for x in counts if x != counts[0]]:
+		raise ValueError('Mismatched number of entries in word data')
+
+	if convertPinyin:		#This is a custom-feature, it may not behave as everyone would like
+		alts = [', '.join([', '.join([''.join(x.split()), pinyinToASCII(x)]) for x in altList.strip().split(', ')])
+				for altList in alts]
+
+	wordJSON = [{'word':w, 'alt':x.strip().split(', '), 'meaning':y.strip().split(', '), 'pos':z.strip().split(', ')}
+				for w,x,y,z in zip(words, alts, meanings, pos)]
+
+	for wordEntry in wordJSON:
+		if len(wordEntry['meaning']) != len(wordEntry['pos']):
+			raise ValueError('"{}" does not have a matching number of meanings ({}) and parts of speech({})'
+				.format(wordEntry['word'], len(wordEntry['meaning']), len(wordEntry['pos'])))
 
 	if (os.path.isfile(filename.split('.')[0] + '.vocab')):
 		if ('y' != input('Warning, .vocab file already exists, overwrite? ')[0].lower()):
 			sys.exit(0)
 
 	with open(filename.split('.')[0] + '.vocab', 'w') as fOut:
-		json.dump(wordJSON, fOut, indent=2, ensure_ascii=False, sort_keys=True)
-
-	sys.exit(0)
+		json.dump(wordJSON, fOut, indent=indentLevel, ensure_ascii=False, sort_keys=True)
 
 
 def pinyinToASCII(phrase):
 	'''Converts pinyin with tonal marks into conventional word# form.'''
 	pWords = phrase.split(' ')
 	toReturn = ''
-	# print('Working on {}'.format(pWords))
 	for word in pWords:
 		# translate tonal mark to #
 		neutralTone = True
@@ -162,9 +204,7 @@ def asciiToPinyin(phrase, preserveSpaces=True):
 	'''Inverse of pinyinToASCII, converts words from word# into pinyin.'''
 	aWords = phrase.split(' ')
 	toReturn = ''
-
 	for word in aWords:
-		# print('Working on: {}'.format(word))
 		if word[-1:] in ['1','2','3','4']:
 			vowels = [x.lower() for x in re.findall(r'[a|e|i|o|u|v]*', word, re.IGNORECASE) if len(x) > 0][0]
 			vowel = sorted(vowels)[0] if vowels[0] != 'i' or len(vowels) == 1 else vowels[1]
@@ -187,10 +227,9 @@ def toRaw(filename):
 	altStr = '  '.join([asciiToPinyin(' '.join(re.findall(r'[A-z]+[1-4]?',x))) for _, x in data])
 	with open(filename.split('.')[0] + '.vraw.inc', 'w') as fOut:
 		print('{}\n----\n{}'.format(wordStr, altStr), file=fOut)
-	sys.exit(0)
 
 
-DESC = ''' A CLI-flashcard program '''
+DESC = '''A CLI-flashcard program'''
 
 if __name__ == '__main__':
 	main()
