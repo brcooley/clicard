@@ -36,8 +36,11 @@ PINYIN_TRANSLATIONS = {
 	'à': 'a4', 'è': 'e4', 'ì': 'i4', 'ò': 'o4', 'ù': 'u4', 'ǜ': 'v4'
 }
 
+wordList = []
+
 
 def main():
+	global wordList
 
 	parser = OptionParser(description=DESC, prog=PROG_TITLE, version='{} version {}'.format(PROG_TITLE, VERSION))
 	parser.add_option('-b','--build', help='Convert raw vocab input into JSON list', metavar='FILE')
@@ -48,7 +51,6 @@ def main():
 	args, cardfiles = parser.parse_args()
 	print()
 
-	wordList = []
 	ansList  = []
 	wrongAns = []
 
@@ -88,8 +90,7 @@ def main():
 			wordList += json.load(wordsIn)
 
 	random.shuffle(wordList)
-	print('{} : {}'.format(len(wordList), wordList))
-	sys.exit()
+	menu()
 
 	# for wordData in wordList:
 
@@ -109,6 +110,59 @@ def main():
 			else:
 				wrongAns.remove(word)
 		random.shuffle(wrongAns)
+
+# Need way to stop execution during testing, possibly stats (post-release?)
+def menu():
+	'''Pseudo-REPL menu which directs users to correct kind of practice'''
+	print('==CLI Flashcards==')
+	print('1) Test for meaning (Words shown)')
+	print('2) Test for identification (Meaning shown)')
+	print('3) Test for recognition (Words shown)')
+	print('4) Quit')
+	while True:
+		userInput = input('? ')
+		if userInput == '1':
+			testMeaning()
+		elif userInput == '2':
+			pass
+		elif userInput == '3':
+			pass
+		elif userInput == '4':
+			print()
+			sys.exit(0)
+		else:
+			continue
+
+
+# Need to implement '..., or X' functionality, handling of using "to" with verbs, plural meanings and better support for
+# case insensitivity
+def testMeaning():
+	'''Uses generated wordlist to test for meaning knowledge'''
+	global wordList
+	correct = 0
+	while correct < len(wordList):
+		word = wordList.pop(0)
+		possAns = input('What does {} mean? '.format(word['word'])).lower()
+		if possAns in word['meaning']:
+			correct += 1
+			print('Correct, {} means {}'.format(word['word'], possAns))
+			if len(word['meaning']) > 1:
+				print('{} could also mean '.format(word['word']),end='')
+				for other in [x for x in word['meaning'] if x != possAns]:
+					print('{}, '.format(other),end='')
+				print('\b\b ')
+				sys.stdout.flush()
+		else:
+			try:
+				word['tries'] += 1
+			except KeyError:
+				word['tries'] = 1
+			if word['tries'] < 4:
+				print('Sorry, that is not correct, {word} will be tested again'.format(**word))
+			else:
+				print('That is incorrect, {word} means {meaning[0]}'.format(**word))
+			wordList.append(word)
+
 
 
 def stripComments(inputList):
@@ -166,8 +220,8 @@ def createVocab(filename, indentLevel):
 		alts = [', '.join([', '.join([''.join(x.split()), pinyinToASCII(x)]) for x in altList.strip().split(', ')])
 				for altList in alts]
 
-	wordJSON = [{'word':w, 'alt':x.strip().split(', '), 'meaning':y.strip().split(', '), 'pos':z.strip().split(', ')}
-				for w,x,y,z in zip(words, alts, meanings, pos)]
+	wordJSON = [{'word':w, 'alt':x.strip().split(', '), 'meaning':y.strip().lower().split(', '),
+				'pos':z.strip().split(', ')} for w,x,y,z in zip(words, alts, meanings, pos)]
 
 	for wordEntry in wordJSON:
 		if len(wordEntry['meaning']) != len(wordEntry['pos']):
