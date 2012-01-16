@@ -3,7 +3,7 @@
 # Each section must start with one of the six identifiers ('LNG:', WRD:', ALT:', 'DEF:', 'POS:', or 'EXT:')
 # Order of the sections does not matter, but each must be delimited by '----' (four dashes)
 LNG:
-Chinese	# Or anything really, currently only Chinese modifies the parsing, allowing for pinyin
+English	# Or anything really, currently only Chinese modifies the parsing, allowing for pinyin
 		# to be converted to word(tone number) form (e.g. shi4)
 ----
 WRD:

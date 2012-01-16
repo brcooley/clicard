@@ -1,2 +1,5 @@
 *.tmp
 *.pyc
+CH*.vocab
+CH*.vraw
+Example.vocab

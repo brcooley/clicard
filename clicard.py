@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Target - Python 3.1.X and later
 
-''' CLIFlashcards is a command-line vocabulary study tool
+''' CLIcards is a command-line vocabulary study tool
 	Copyright (C) 2012  Brett Cooley
 
 	This program is free software: you can redistribute it and/or modify
@@ -25,8 +25,9 @@ import json
 import re
 from optparse import *
 
-PROG_TITLE = 'CLIFlashcards'
-VERSION = '0.5'
+PROG_TITLE = 'CLIcards'
+VERSION = '0.5a-r1'
+VER = VERSION[:4]
 
 PINYIN_TRANSLATIONS = {
 	'ü': 'v',
@@ -47,7 +48,6 @@ def main():
 	parser.add_option('-t','--to-raw', help='Convert ctxt input into raw', metavar='FILE')
 	parser.add_option('-r','--human-readable', action='store_const', const=2, help='Prints vocab file with indentation')
 	parser.add_option('-i','--interact', action='store_true', help='Enter interactive mode for debugging')
-	#parser.add_argument('-d','-D','--debug', action='store_true', help='enables debugging and logging')
 	args, cardfiles = parser.parse_args()
 	print()
 
@@ -91,15 +91,6 @@ def main():
 
 	random.shuffle(wordList)
 	menu()
-
-	# for wordData in wordList:
-
-	for word in wordList:
-		possAns = input('{}? '.format(word[0]))
-		if possAns.lower() not in word[1]:
-			print('Correct answer is {}'.format(word[1][0]))
-			wrongAns.append(word)
-	print('Need to study {} characters again'.format(len(wrongAns)))
 
 	while len(wrongAns):
 		for word in wrongAns[:]:
@@ -194,7 +185,8 @@ def createVocab(filename, indentLevel):
 		tag, rest = dataSec.split(':',1)
 		tag = tag.strip()
 		if tag == 'LNG':
-			convertPinyin = True
+			if rest.strip() == 'Chinese':
+				convertPinyin = True
 		elif tag == 'WRD':
 			words = [x for x in rest.split(sep) if x != '']
 			counts.append(len(words))
