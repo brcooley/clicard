@@ -26,7 +26,7 @@ import re
 from optparse import *
 
 PROG_TITLE = 'CLIcards'
-VERSION = '0.5a-r1'
+VERSION = '0.5a-r2'
 VER = VERSION[:4]
 
 PINYIN_TRANSLATIONS = {
@@ -45,7 +45,6 @@ def main():
 
 	parser = OptionParser(description=DESC, prog=PROG_TITLE, version='{} version {}'.format(PROG_TITLE, VERSION))
 	parser.add_option('-b','--build', help='Convert raw vocab input into JSON list', metavar='FILE')
-	parser.add_option('-t','--to-raw', help='Convert ctxt input into raw', metavar='FILE')
 	parser.add_option('-r','--human-readable', action='store_const', const=2, help='Prints vocab file with indentation')
 	parser.add_option('-i','--interact', action='store_true', help='Enter interactive mode for debugging')
 	args, cardfiles = parser.parse_args()
@@ -79,10 +78,6 @@ def main():
 		finally:
 			sys.exit()
 
-	if args.to_raw:
-		toRaw(args.to_raw)
-		sys.exit(0)
-
 	# Builds list of word data from each file passed in
 	wordList = []
 	for cFile in cardfiles:
@@ -92,15 +87,6 @@ def main():
 	random.shuffle(wordList)
 	menu()
 
-	while len(wrongAns):
-		for word in wrongAns[:]:
-			possAns = input('{}? '.format(word[0]))
-			if possAns.lower() not in word[1]:
-				print('Correct answer is {}'.format(word[1][0]))
-				#print(wrongAns)
-			else:
-				wrongAns.remove(word)
-		random.shuffle(wrongAns)
 
 # Need way to stop execution during testing, possibly stats (post-release?)
 def menu():
@@ -131,8 +117,12 @@ def testMeaning():
 	'''Uses generated wordlist to test for meaning knowledge'''
 	global wordList
 	correct = 0
+	sentinel = ''
+	wordSet = wordList[:]
 	while correct < len(wordList):
-		word = wordList.pop(0)
+		word = wordSet.pop(0)
+		if word['word'] == sentinel:
+			random.shuffle(wordSet)
 		possAns = input('What does {} mean? '.format(word['word'])).lower()
 		if possAns in word['meaning']:
 			correct += 1
@@ -144,6 +134,7 @@ def testMeaning():
 				print('\b\b ')
 				sys.stdout.flush()
 		else:
+			sentinel = word['word']
 			try:
 				word['tries'] += 1
 			except KeyError:
@@ -152,7 +143,7 @@ def testMeaning():
 				print('Sorry, that is not correct, {word} will be tested again'.format(**word))
 			else:
 				print('That is incorrect, {word} means {meaning[0]}'.format(**word))
-			wordList.append(word)
+			wordSet.append(word)
 
 
 
@@ -263,16 +254,6 @@ def asciiToPinyin(phrase, preserveSpaces=True):
 		if preserveSpaces:
 			toReturn += ' '
 	return toReturn.strip()
-
-
-def toRaw(filename):
-	'''Converts old ctxt format to vraw.inc format.'''
-	with open(filename, 'r') as fIn:
-		data = [(line.split()[0], line.split()[1]) for line in fIn.readlines()]
-	wordStr = '\n'.join([x[0] for x in data])
-	altStr = '  '.join([asciiToPinyin(' '.join(re.findall(r'[A-z]+[1-4]?',x))) for _, x in data])
-	with open(filename.split('.')[0] + '.vraw.inc', 'w') as fOut:
-		print('{}\n----\n{}'.format(wordStr, altStr), file=fOut)
 
 
 DESC = '''A CLI-flashcard program'''
