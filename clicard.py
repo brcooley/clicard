@@ -26,7 +26,7 @@ import re
 from optparse import *
 
 PROG_TITLE = 'CLIcards'
-VERSION = '0.5a-r2'
+VERSION = '0.5a-r3'
 VER = VERSION[:4]
 
 PINYIN_TRANSLATIONS = {
@@ -37,12 +37,62 @@ PINYIN_TRANSLATIONS = {
 	'à': 'a4', 'è': 'e4', 'ì': 'i4', 'ò': 'o4', 'ù': 'u4', 'ǜ': 'v4'
 }
 
-wordList = []
 
+#FUT Allow persistant statistics
+class SessionStats(object):
+	'''Object that manages statistics for a session.'''
+
+	def __init__(self):
+		self._tests = 0
+		self._isRunning = False
+		self._stats = []
+
+
+	def __str__(self):
+		totalCorrect = sum([c for _,c,_ in self._stats])
+		totalAttempt = sum([a for _,_,a in self._stats])
+		toReturn = '\nYou have taken {}'.format(self._tests)
+		if self._tests > 1:
+			toReturn += ' tests, '
+		else:
+			toReturn += ' test, '
+		toReturn += 'answering correctly {} times out of {} attempts ({:.2%})'.format(
+			totalCorrect, totalAttempt, totalCorrect/totalAttempt)
+
+		toReturn += '\nTEST\t\t\tSCORE\tPER\n'
+		toReturn += '='*36
+		for i, (tType, correct, attempt) in enumerate(self._stats):
+			if tType == 0:
+				toReturn += '\nMeaning Test {}:\t\t'.format(i+1)
+			elif tType == 1:
+				toReturn += '\nIdentification Test {}:\t'.format(i+1)
+			elif tType == 2:
+				toReturn += '\nRecognition Test {}:\t'.format(i+1)
+			toReturn += '{}/{}\t{:.2%}'.format(correct,attempt, correct/attempt)
+		return toReturn
+
+
+	def startTest(self, testType):
+		'''Start collecting statistics for a test of type TYPE'''
+		self._isRunning = True
+		self._tests += 1
+		if testType == 'mean':
+			self.curTest = 0
+		elif testType == 'id':
+			self.curTest = 1
+		elif testType == 'rec':
+			self.curTest = 2
+		self.correct = 0
+		self.attempt = 0
+
+
+	def stopTest(self):
+		'''Stops stat collection for the current test, does nothing if no test is running'''
+		if self._isRunning:
+			self._isRunning = False
+			self._stats.append((self.curTest, self.correct, self.attempt))
 
 def main():
-	global wordList
-
 	parser = OptionParser(description=DESC, prog=PROG_TITLE, version='{} version {}'.format(PROG_TITLE, VERSION))
 	parser.add_option('-b','--build', help='Convert raw vocab input into JSON list', metavar='FILE')
 	parser.add_option('-r','--human-readable', action='store_const', const=2, help='Prints vocab file with indentation')
@@ -84,48 +134,60 @@ def main():
 		with open(cFile) as wordsIn:
 			wordList += json.load(wordsIn)
 
-	random.shuffle(wordList)
-	menu()
+	statLog = SessionStats()
 
-
-# Need way to stop execution during testing, possibly stats (post-release?)
-def menu():
-	'''Pseudo-REPL menu which directs users to correct kind of practice'''
-	print('==CLI Flashcards==')
-	print('1) Test for meaning (Words shown)')
-	print('2) Test for identification (Meaning shown)')
-	print('3) Test for recognition (Words shown)')
-	print('4) Quit')
 	while True:
-		userInput = input('? ')
-		if userInput == '1':
-			testMeaning()
-		elif userInput == '2':
-			pass
-		elif userInput == '3':
-			pass
-		elif userInput == '4':
-			print()
-			sys.exit(0)
-		else:
-			continue
+		print('\n==CLI Flashcards==')
+		print('1) Test for meaning (Words shown)')
+		print('2) Test for identification (Meaning shown)')
+		print('3) Test for recognition (Words shown)')
+		print('4) Show statistics')
+		print('5) Quit')
+
+		validInput = False
+		while not validInput:
+			userInput = input('? ')
+			validInput = True
+			if userInput == '1':
+				statLog.startTest('mean')
+				testMeaning(wordList, statLog)
+			elif userInput == '2':
+				pass
+			elif userInput == '3':
+				pass
+			elif userInput == '4':
+				print(statLog)
+			elif userInput == '5':
+				print()
+				sys.exit(0)
+			else:
+				validInput = False
+				continue
+
+			statLog.stopTest()
 
 
 # Need to implement '..., or X' functionality, handling of using "to" with verbs, plural meanings and better support for
 # case insensitivity
-def testMeaning():
+def testMeaning(wordList, statLog):
 	'''Uses generated wordlist to test for meaning knowledge'''
-	global wordList
-	correct = 0
 	sentinel = ''
 	wordSet = wordList[:]
-	while correct < len(wordList):
+	random.shuffle(wordSet)
+
+	print('Type "q" at any time to quit')
+
+	while statLog.correct < len(wordList):
 		word = wordSet.pop(0)
 		if word['word'] == sentinel:
 			random.shuffle(wordSet)
 		possAns = input('What does {} mean? '.format(word['word'])).lower()
+		if possAns == 'q':
+			return
+		statLog.attempt += 1
+
 		if possAns in word['meaning']:
-			correct += 1
+			statLog.correct += 1
 			print('Correct, {} means {}'.format(word['word'], possAns))
 			if len(word['meaning']) > 1:
 				print('{} could also mean '.format(word['word']),end='')
@@ -144,7 +206,6 @@ def testMeaning():
 			else:
 				print('That is incorrect, {word} means {meaning[0]}'.format(**word))
 			wordSet.append(word)
-
 
 
 def stripComments(inputList):
@@ -175,9 +236,8 @@ def createVocab(filename, indentLevel):
 	for dataSec in wordData:
 		tag, rest = dataSec.split(':',1)
 		tag = tag.strip()
-		if tag == 'LNG':
-			if rest.strip() == 'Chinese':
-				convertPinyin = True
+		if tag == 'LNG' and rest.strip() == 'Chinese':
+			convertPinyin = True
 		elif tag == 'WRD':
 			words = [x for x in rest.split(sep) if x != '']
 			counts.append(len(words))
@@ -199,7 +259,7 @@ def createVocab(filename, indentLevel):
 	if [x for x in counts if x != counts[0]]:
 		raise ValueError('Mismatched number of entries in word data')
 
-	if convertPinyin:		#This is a custom-feature, it may not behave as everyone would like
+	if convertPinyin:		#This is a custom-feature, it may not behave as everyone would expect/like
 		alts = [', '.join([', '.join([''.join(x.split()), pinyinToASCII(x)]) for x in altList.strip().split(', ')])
 				for altList in alts]
 

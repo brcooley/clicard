@@ -1,4 +1,4 @@
-# FlashCard v0.5.0a #
+# FlashCard v0.5a-r3 #
 
 A program to help with the study of foreign languages, with special considerations for CJK languages.
 
