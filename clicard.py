@@ -43,7 +43,7 @@ class SessionStats(object):
 	'''Object that manages statistics for a session.'''
 
 	def __init__(self):
-		self._tests = 0
+		self.tests = 0
 		self._isRunning = False
 		self._stats = []
 
@@ -51,8 +51,8 @@ class SessionStats(object):
 	def __str__(self):
 		totalCorrect = sum([c for _,c,_ in self._stats])
 		totalAttempt = sum([a for _,_,a in self._stats])
-		toReturn = '\nYou have taken {}'.format(self._tests)
-		if self._tests > 1:
+		toReturn = '\nYou have taken {}'.format(self.tests)
+		if self.tests > 1:
 			toReturn += ' tests, '
 		else:
 			toReturn += ' test, '
@@ -73,9 +73,11 @@ class SessionStats(object):
 
 
 	def startTest(self, testType):
-		'''Start collecting statistics for a test of type TYPE'''
+		'''Start collecting statistics for a test of type testType'''
+		if self._isRunning:
+			return 	# Makes calling startTest harmless if called more than once (idempotent)
 		self._isRunning = True
-		self._tests += 1
+		self.tests += 1
 		if testType == 'mean':
 			self.curTest = 0
 		elif testType == 'id':
@@ -156,7 +158,10 @@ def main():
 			elif userInput == '3':
 				pass
 			elif userInput == '4':
-				print(statLog)
+				if statLog.tests > 0:
+					print(statLog)
+				else:
+					print('No statistics available yet.')
 			elif userInput == '5':
 				print()
 				sys.exit(0)
